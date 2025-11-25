@@ -10,7 +10,7 @@ const Banner = () => {
     <Carousel autoPlay={true} infiniteLoop={true}>
       <div className="relative">
         <img className="w-full h-auto" src={banner1} />
-        <button className="bg-primary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-secondary  text-white">
+        <button className="bg-secondary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-primary  text-white">
           Track Your Parcel
         </button>
         <button className="btn btn-outline btn-secondary text-2xl text-black hover:text-white absolute top-112 left-78">
@@ -19,7 +19,7 @@ const Banner = () => {
       </div>
       <div>
         <img className="w-full h-auto" src={banner2} />
-        <button className="bg-primary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-secondary  text-white">
+        <button className="bg-secondary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-primary  text-white">
           Track Your Parcel
         </button>
         <button className="btn btn-outline btn-secondary text-2xl text-black hover:text-white absolute top-112 left-78">
@@ -28,7 +28,7 @@ const Banner = () => {
       </div>
       <div>
         <img className="w-full h-auto" src={banner3} />
-        <button className="bg-primary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-secondary  text-white">
+        <button className="bg-secondary absolute top-112 btn rounded-3xl left-20 text-2xl hover:bg-primary  text-white">
           Track Your Parcel
         </button>
         <button className="btn btn-outline btn-secondary text-2xl text-black hover:text-white absolute top-112 left-78">
