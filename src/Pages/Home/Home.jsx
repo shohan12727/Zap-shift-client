@@ -5,6 +5,7 @@ import Services from "./Services";
 import Brands from "./Brands";
 import Information from "./Information";
 import Reviews from "./Reviews";
+import Faq from "./Faq";
 
 const reviewPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -17,6 +18,7 @@ const Home = () => {
       <Brands></Brands>
       <Information></Information>
       <Reviews reviewPromise={reviewPromise}></Reviews>
+      <Faq></Faq>
     </div>
   );
 };
