@@ -18,6 +18,20 @@ const brandLogos = [
   amazon_vector,
   star,
   star_people,
+  amazon,
+  casio,
+  monster,
+  randstad,
+  amazon_vector,
+  star,
+  star_people,
+  amazon,
+  casio,
+  monster,
+  randstad,
+  amazon_vector,
+  star,
+  star_people,
 ];
 const Brands = () => {
   return (
