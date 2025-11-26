@@ -14,7 +14,6 @@ const ErrorPage = () => {
         <p className="text-gray-600 mt-2">
           The page you are looking for doesn't exist.
         </p>
-
         <Link
           to="/"
           className="mt-6 inline-block bg-primary text-white px-6 py-3 rounded-xl  transition"
