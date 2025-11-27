@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
   const {
@@ -8,8 +10,19 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+
+const {registerUser} = useAuth();
+
+
   const handleRegistration = (data) => {
     console.log(data);
+    registerUser(data.email, data.password)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   };
 
   return (
@@ -94,12 +107,12 @@ const Register = () => {
           {/* Link to Login Page */}
           <p className="text-sm text-center mt-6 text-gray-600">
             Already have an account?
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="text-secondary hfont-semibold ml-1 transition duration-150"
             >
               Log in here
-            </a>
+            </Link>
           </p>
         </form>
       </div>
