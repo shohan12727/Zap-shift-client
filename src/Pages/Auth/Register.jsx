@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useAuth from "../../Hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   const {
@@ -26,7 +27,7 @@ const {registerUser} = useAuth();
   };
 
   return (
-    <div className="flex justify-center items-center p-4 sm:p-6">
+    <div className="flex justify-center items-center p-4 sm:p-6 ">
       <div className="card w-full max-w-md mx-auto shadow-sm bg-white rounded-lg">
         <form
           onSubmit={handleSubmit(handleRegistration)}
@@ -109,12 +110,13 @@ const {registerUser} = useAuth();
             Already have an account?
             <Link
               to="/login"
-              className="text-secondary hfont-semibold ml-1 transition duration-150"
+              className="text-secondary underline hfont-semibold ml-1 transition duration-150"
             >
               Log in here
             </Link>
           </p>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );
