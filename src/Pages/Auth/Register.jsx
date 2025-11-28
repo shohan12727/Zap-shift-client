@@ -19,7 +19,11 @@ const {registerUser} = useAuth();
     console.log(data);
     registerUser(data.email, data.password)
     .then(result => {
-      console.log(result);
+      console.log(result.user);
+      // store the image and get the photo url
+
+      // update user profile
+      
     })
     .catch(err => {
       console.log(err);
@@ -37,6 +41,48 @@ const {registerUser} = useAuth();
             Create Account
           </h2>
 
+          {/* name Input Group */}
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text font-medium text-gray-700">
+                Name
+              </span>
+            </label>
+            <input
+              type="text"
+              {...register("name", { required: true })}
+              className={`input input-bordered w-full p-3 border rounded-md ${
+                errors.email
+                  ? "border-red-500 bg-red-50"
+                  : "border-gray-300 focus:border-blue-500"
+              }`}
+              placeholder="Enter your name"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-red-500 text-sm mt-1">Name is required.</p>
+            )}
+          </div>
+          {/* Image/ photo Input Group */}
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text font-medium text-gray-700">
+                Photo
+              </span>
+            </label>
+            <input
+              type="file"
+              {...register("photo", { required: true })}
+              className={`file-input  w-full  border  ${
+                errors.email
+                  ? "border-red-500 bg-red-50"
+                  : "border-gray-300 focus:border-blue-500"
+              }`}
+              placeholder="Enter your photo"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-red-500 text-sm mt-1">Photo is required.</p>
+            )}
+          </div>
           {/* Email Input Group */}
           <div className="form-control mb-4">
             <label className="label">

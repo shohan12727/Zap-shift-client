@@ -1,6 +1,5 @@
-import React from "react";
-import Logo from "../../Components/logo";
 import { Link, NavLink } from "react-router";
+import Logo from "../../Components/Logo";
 import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
