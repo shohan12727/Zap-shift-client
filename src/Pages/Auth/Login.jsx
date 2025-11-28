@@ -1,10 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,6 +19,7 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        navigate(location.state || '/');
       })
       .catch((error) => {
         console.log(error);
@@ -80,7 +83,9 @@ const Login = () => {
           >
             Login
           </button>
-          <p>New to Zap SHift? <Link className="underline text-secondary" to='/register'>Register</Link></p>
+          <p>New to Zap SHift? <Link 
+          state={location.state}
+          className="underline text-secondary" to='/register'>Register</Link></p>
         </form>
         <SocialLogin/>
         

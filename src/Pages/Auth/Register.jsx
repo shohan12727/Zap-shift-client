@@ -1,33 +1,95 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "./SocialLogin";
+import axios from "axios";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const { registerUser, updateUserProfile } = useAuth();
 
-const {registerUser} = useAuth();
+  // const handleRegistration = (data) => {
+  //   console.log(data);
+  //   const profileImage = data.photo[0];
+  //   registerUser(data.email, data.password)
+  //     .then((result) => {
+  //       console.log(result.user);
+  //       // store the image and get the photo url
+  //       const formData = new FormData();
+  //       formData.append("image", profileImage);
+  //       const imageApiUrl = `https://api.imgbb.com/1/upload?key=${
+  //         import.meta.env.VITE_imagebb_api_key
+  //       }`;
 
+  //       axios.post(imageApiUrl, formData)
+  //       .then((res) => {
+  //         console.log("After image upload", res.data);
+  //       });
+  //       // update user profile
+  //       const userProfile = {
+  //         displayName : data.name,
+  //         photoURL : res.data.data.url
+  //       }
+  //           updateUserProfile(userProfile)
+  //           .then(() => {
+  //             console.log('after user update done')
+  //           } )
+  //           .catch(error => {
+  //             console.log(error)
+  //           })
+
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const handleRegistration = (data) => {
     console.log(data);
-    registerUser(data.email, data.password)
-    .then(result => {
-      console.log(result.user);
-      // store the image and get the photo url
 
-      // update user profile
-      
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    const profileImage = data.photo[0];
+
+    // Step 1: Register user using Firebase
+    registerUser(data.email, data.password)
+      .then((result) => {
+        console.log("User created:", result.user);
+
+        // Step 2: Upload image to imgbb
+        const formData = new FormData();
+        formData.append("image", profileImage);
+
+        const imageApiUrl = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_imagebb_api_key
+        }`;
+
+        return axios.post(imageApiUrl, formData);
+      })
+      .then((res) => {
+        console.log("Image uploaded:", res.data);
+
+        // Step 3: After image upload, update user profile
+        const userProfile = {
+          displayName: data.name,
+          photoURL: res.data.data.url, // Image URL from imgbb
+        };
+
+        return updateUserProfile(userProfile);
+      })
+      .then(() => {
+        console.log("User profile updated successfully!");
+        navigate(location.state || '/');
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
   };
 
   return (
@@ -44,9 +106,7 @@ const {registerUser} = useAuth();
           {/* name Input Group */}
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text font-medium text-gray-700">
-                Name
-              </span>
+              <span className="label-text font-medium text-gray-700">Name</span>
             </label>
             <input
               type="text"
@@ -155,8 +215,9 @@ const {registerUser} = useAuth();
           <p className="text-sm text-center mt-6 text-gray-600">
             Already have an account?
             <Link
-              to="/login"
+              state={location.state}
               className="text-secondary underline hfont-semibold ml-1 transition duration-150"
+              to="/login"
             >
               Log in here
             </Link>
