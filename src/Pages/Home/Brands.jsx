@@ -1,4 +1,3 @@
-import React from "react";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import amazon from "../../assets/brands/amazon.png";
@@ -42,7 +41,7 @@ const Brands = () => {
       grabCursor={true}
       loop={true}
       autoplay={{
-        delay: 500,
+        delay: 400,
         disableOnInteraction: false,
       }}
       modules={[Autoplay]}
