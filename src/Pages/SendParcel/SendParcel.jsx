@@ -4,24 +4,21 @@ import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
   const servicCenters = useLoaderData();
-  const duplicateRegions = servicCenters.map(c => c.region)
-  const regions = [...new Set(duplicateRegions)]
-  console.log(regions);
-  
+  const duplicateRegions = servicCenters.map(c => c.region);
+  const regions = [...new Set(duplicateRegions)];
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch
   } = useForm();
+
   const senderRegion = watch("senderRegion");
 
   const districtByRegions = region => {
-    const regionDistricts = servicCenters.filter(c => c.region === region)
-    const districts = regionDistricts.map(d => d.district)
-    return districts;
-  }
+    const regionDistricts = servicCenters.filter(c => c.region === region);
+    return regionDistricts.map(d => d.district);
+  };
 
   const handleSendParcel = (data) => {
     console.log(data);
@@ -30,38 +27,35 @@ const SendParcel = () => {
   return (
     <div>
       <h2 className="text-5xl font-bold p-4">Send A Parcel</h2>
-      <form
-        onSubmit={handleSubmit(handleSendParcel)}
-        className="mt-12 p-4 text-black"
-      >
-        {/* document */}
+
+      <form onSubmit={handleSubmit(handleSendParcel)} className="mt-12 p-4 text-black">
+
+        {/* Parcel Type */}
         <div className="space-x-4">
-          <label className="label">
+          <label className="label flex items-center gap-2">
             <input
               type="radio"
               {...register("parcelType")}
               value="document"
-              // name="radio-1"
               className="radio"
               defaultChecked
             />
-            Document
+            <span>Document</span>
           </label>
-          <label className="label">
+
+          <label className="label flex items-center gap-2">
             <input
               type="radio"
               {...register("parcelType")}
               value="non-document"
-              // name="radio-1"
               className="radio"
             />
-            Non-Document
+            <span>Non-Document</span>
           </label>
         </div>
 
-        {/* parcel info: name, weight  */}
+        {/* Parcel info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
-          {/* parcel name  */}
           <fieldset className="fieldset">
             <label className="label">Parcel Name</label>
             <input
@@ -71,7 +65,7 @@ const SendParcel = () => {
               placeholder="Parcel Name"
             />
           </fieldset>
-          {/* parcel weight  */}
+
           <fieldset className="fieldset">
             <label className="label">Parcel Weight</label>
             <input
@@ -83,14 +77,13 @@ const SendParcel = () => {
           </fieldset>
         </div>
 
-        {/* two column  */}
+        {/* Sender / Receiver Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* sender info  */}
 
+          {/* Sender Details */}
           <fieldset className="fieldset">
             <h4 className="text-2xl font-semibold">Sender Details</h4>
 
-            {/* sender name  */}
             <label className="label">Sender Name</label>
             <input
               type="text"
@@ -99,7 +92,6 @@ const SendParcel = () => {
               placeholder="Sender Name"
             />
 
-            {/* sender email  */}
             <label className="label">Sender Email</label>
             <input
               type="email"
@@ -107,47 +99,38 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="Sender Email"
             />
-            {/* sender regions  */}
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Sender Regions</legend>
-              <select {...register('senderRegion')} defaultValue="Pick a region"  className="select">
-                <option disabled={true}>Pick a Regions</option>
-                {
-                  regions.map((region, i) =>  <option key={i} value={region}>{region}</option>
-                  )
-                }
-               
-              
-              </select>
-              <span className="label">Optional</span>
-            </fieldset>
+            {/* Sender Region */}
+            <label className="label mt-4">Sender Region</label>
+            <select {...register("senderRegion")} className="select w-full">
+              <option value="" disabled>Select Region</option>
+              {regions.map((region, i) => (
+                <option key={i} value={region}>{region}</option>
+              ))}
+            </select>
 
-            {/* sedner address  */}
+            {/* Sender District */}
+            <label className="label mt-4">Sender District</label>
+            <select {...register("senderDistrict")} className="select w-full">
+              <option value="" disabled>Select District</option>
+              {districtByRegions(senderRegion)?.map((district, i) => (
+                <option key={i} value={district}>{district}</option>
+              ))}
+            </select>
+
             <label className="label mt-4">Sender Address</label>
             <input
               type="text"
               {...register("senderAddress")}
-              className="input w-full mt-4"
+              className="input w-full"
               placeholder="Sender Address"
-            />
-            {/* sender district */}
-            <label className="label mt-4">Sender District</label>
-            <input
-              type="text"
-              {...register("senderDistrict")}
-              className="input w-full "
-              placeholder="Sender District"
             />
           </fieldset>
 
-          {/* receiver info  */}
-
+          {/* Receiver Details */}
           <fieldset className="fieldset">
-            <h4 className="text-2xl font-semibold text-black">
-              Receiver Details
-            </h4>
-            {/* receiver name  */}
+            <h4 className="text-2xl font-semibold">Receiver Details</h4>
+
             <label className="label">Receiver Name</label>
             <input
               type="text"
@@ -155,7 +138,7 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="Receiver Name"
             />
-            {/* receiver email  */}
+
             <label className="label">Receiver Email</label>
             <input
               type="email"
@@ -164,28 +147,29 @@ const SendParcel = () => {
               placeholder="Receiver Email"
             />
 
-            {/* receiver address  */}
             <label className="label mt-4">Receiver Address</label>
             <input
               type="text"
               {...register("receiverAddress")}
-              className="input w-full mt-4"
+              className="input w-full"
               placeholder="Receiver Address"
             />
-            {/* receiver district */}
+
             <label className="label mt-4">Receiver District</label>
             <input
               type="text"
               {...register("receiverDistrict")}
-              className="input w-full "
+              className="input w-full"
               placeholder="Receiver District"
             />
           </fieldset>
+
         </div>
+
         <input
           type="submit"
           value="Send Parcel"
-          className="btn btn-primary text-black"
+          className="btn btn-primary mt-8 text-black"
         />
       </form>
     </div>
@@ -193,5 +177,3 @@ const SendParcel = () => {
 };
 
 export default SendParcel;
-
-// 13 minutes 
