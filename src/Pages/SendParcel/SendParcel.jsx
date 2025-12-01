@@ -2,20 +2,23 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
 const SendParcel = () => {
   const servicCenters = useLoaderData();
-  console.log(servicCenters);
+  // console.log(servicCenters);
 
   const duplicateRegions = servicCenters.map((c) => c.region);
   const regions = [...new Set(duplicateRegions)];
   // use memo and use call back
 
   const { register, handleSubmit, control } = useForm();
+  const {user} = useAuth();
+  const axiosSecure = useAxiosSecure()
 
   const senderRegion = useWatch({ control, name: "senderRegion" });
   const receiverRegion = useWatch({ control, name: "receiverRegion" });
-
   const districtByRegions = (region) => {
     const regionDistricts = servicCenters.filter((c) => c.region === region);
     return regionDistricts.map((d) => d.district);
@@ -51,6 +54,12 @@ const SendParcel = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
+        // save the parcel info to the database
+        axiosSecure.post('/parcels', data)
+        .then(res => {
+          console.log('after saving parcel',res.data);  
+          
+        })
 
 
 
@@ -123,19 +132,21 @@ const SendParcel = () => {
           {/* Sender Details */}
           <fieldset className="fieldset">
             <h4 className="text-2xl font-semibold">Sender Details</h4>
-
+     {/* sender name   */}
             <label className="label">Sender Name</label>
             <input
               type="text"
               {...register("senderName")}
+              defaultValue={user?.displayName}
               className="input w-full"
               placeholder="Sender Name"
             />
-
+       {/* sender email  */}
             <label className="label">Sender Email</label>
             <input
               type="email"
               {...register("senderEmail")}
+              defaultValue={user?.email || ""}
               className="input w-full"
               placeholder="Sender Email"
             />
