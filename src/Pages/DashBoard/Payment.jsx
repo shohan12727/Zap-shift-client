@@ -34,7 +34,7 @@ const Payment = () => {
       `/create-checkout-session`,
       paymentInfo
     );
-    console.log(response.data);
+    // console.log(response.data);
     window.location.href = response.data.url;
   };
 

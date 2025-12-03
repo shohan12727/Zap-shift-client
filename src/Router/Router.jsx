@@ -80,7 +80,7 @@ export const router = createBrowserRouter([
         Component: Payment,
       },
       {
-        path: "payment-success",
+        path: "payment-success", 
         Component: PaymentSuccess,
       },
       {
