@@ -1,16 +1,29 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SocialLogin = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const { signInGoogle } = useAuth();
   const handleGoogleSIgnIn = () => {
     signInGoogle()
       .then((result) => {
         console.log(result);
-        navigate(location.state || '/');
+        navigate(location.state || "/");
+
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        };
+    // create user in the database 
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log("user data has been stored", res.data);
+          navigate(location.state || "/");
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -21,7 +34,10 @@ const SocialLogin = () => {
     <div className="text-center pb-8">
       <p className="mb-2">OR</p>
       {/* Google */}
-      <button onClick={handleGoogleSIgnIn} className="btn bg-white text-black border-[#e5e5e5]">
+      <button
+        onClick={handleGoogleSIgnIn}
+        className="btn bg-white text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"
