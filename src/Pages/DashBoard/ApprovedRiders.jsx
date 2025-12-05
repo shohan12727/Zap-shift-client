@@ -4,7 +4,6 @@ import { FaUserCheck } from "react-icons/fa";
 import { IoPersonRemove } from "react-icons/io5";
 import { FaTrashCan } from "react-icons/fa6";
 
-
 const ApprovedRiders = () => {
   const axiosSecure = useAxiosSecure();
   const { data: riders = [] } = useQuery({
@@ -14,6 +13,8 @@ const ApprovedRiders = () => {
       return res.data;
     },
   });
+
+  const handleApproval = (id) => {};
 
   return (
     <div>
@@ -40,15 +41,18 @@ const ApprovedRiders = () => {
                 <td>{rider.district}</td>
                 <td>{rider.status}</td>
                 <td>
-                    <button className="btn btn-primary text-black">
-                        <FaUserCheck />
-                    </button>
-                    <button className="btn btn-primary text-black">
-                       <IoPersonRemove />
-                    </button>
-                    <button className="btn btn-primary text-black">
-                     <FaTrashCan />
-                    </button>
+                  <button
+                    className="btn btn-primary text-black"
+                    onClick={() => handleApproval(rider._id)}
+                  >
+                    <FaUserCheck />
+                  </button>
+                  <button className="btn btn-primary text-black mx-3">
+                    <IoPersonRemove />
+                  </button>
+                  <button className="btn btn-primary text-black">
+                    <FaTrashCan />
+                  </button>
                 </td>
               </tr>
             ))}
