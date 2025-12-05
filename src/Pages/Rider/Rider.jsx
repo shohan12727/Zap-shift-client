@@ -12,7 +12,7 @@ const Rider = () => {
   const duplicateRegions = servicCenters.map((c) => c.region);
   const regions = [...new Set(duplicateRegions)];
 
-  const senderRegion = useWatch({ control, name: "senderRegion" });
+  const riderRegion = useWatch({ control, name: "region" });
   const receiverRegion = useWatch({ control, name: "receiverRegion" });
 
   const districtByRegions = (region) => {
@@ -31,31 +31,31 @@ const Rider = () => {
         onSubmit={handleSubmit(handleRiderApplication)}
         className="mt-12 p-4 text-black"
       >
-        {/* Sender / Receiver Section */}
+        {/* rider / Receiver Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Sender Details */}
+          {/* rider Details */}
           <fieldset className="fieldset">
             <h4 className="text-2xl font-semibold">Rider Details</h4>
-            {/* sender name   */}
-            <label className="label">Sender Name</label>
+            {/*  name   */}
+            <label className="label">Rider Name</label>
             <input
               type="text"
-              {...register("senderName")}
+              {...register("riderName")}
               defaultValue={user?.displayName}
               className="input w-full"
-              placeholder="Sender Name"
+              placeholder="rider Name"
             />
-            {/* sender email  */}
-            <label className="label">Sender Email</label>
+            {/*  email  */}
+            <label className="label"> Email</label>
             <input
               type="email"
-              {...register("senderEmail")}
+              {...register("email")}
               defaultValue={user?.email || ""}
               className="input w-full"
-              placeholder="Sender Email"
+              placeholder="rider Email"
             />
 
-            {/* Sender Region */}
+            {/* rider Region */}
             <label className="label mt-4">Region</label>
             <select {...register("region")} className="select w-full">
               <option value="" disabled>
@@ -68,13 +68,13 @@ const Rider = () => {
               ))}
             </select>
 
-            {/* Sender District */}
+            {/* rider District */}
             <label className="label mt-4"> District</label>
             <select {...register("district")} className="select w-full">
               <option value="" disabled>
                 Select District
               </option>
-              {districtByRegions(senderRegion)?.map((district, i) => (
+              {districtByRegions(riderRegion)?.map((district, i) => (
                 <option key={i} value={district}>
                   {district}
                 </option>
@@ -86,77 +86,43 @@ const Rider = () => {
               type="text"
               {...register("address")}
               className="input w-full"
-              placeholder="Sender Address"
+              placeholder="rider Address"
             />
           </fieldset>
 
           {/* Receiver Details */}
           <fieldset className="fieldset">
-            <h4 className="text-2xl font-semibold">Receiver Details</h4>
+            <h4 className="text-2xl font-semibold"></h4>
             {/* reciever name  */}
-            <label className="label">Receiver Name</label>
+            <label className="label">Driving License</label>
             <input
               type="text"
-              {...register("receiverName")}
+              {...register("license")}
               className="input w-full"
-              placeholder="Receiver Name"
+              placeholder="Driving License"
             />
-            {/* receiver email  */}
-            <label className="label">Receiver Email</label>
+            {/* nid  */}
+            <label className="label">NID</label>
             <input
-              type="email"
-              {...register("receiverEmail")}
+              type="number"
+              {...register("nid")}
               className="input w-full"
-              placeholder="Receiver Email"
+              placeholder="NID"
             />
 
-            {/* reciver Region */}
-            <label className="label mt-4">Receiver Region</label>
-            <select
-              {...register("receiverRegion")}
-              className="select w-full"
-              defaultValue="pick a region"
-            >
-              <option value="" disabled>
-                Select Region
-              </option>
-              {regions.map((region, i) => (
-                <option key={i} value={region}>
-                  {region}
-                </option>
-              ))}
-            </select>
-            {/* reciver district */}
-            <label className="label mt-4">Receiver District</label>
-            <select
-              {...register("receiverDistrict")}
-              className="select w-full"
-              defaultValue="pick a District"
-            >
-              <option value="" disabled>
-                Select District
-              </option>
-              {districtByRegions(receiverRegion).map((d, index) => (
-                <option key={index} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
-
-            {/* receiver address  */}
-            <label className="label mt-4">Receiver Address</label>
+            {/*  Bike info */}
+            <label className="label mt-4">Bike Info </label>
             <input
-              type="text"
-              {...register("receiverAddress")}
-              className="input w-full"
-              placeholder="Receiver Address"
-            />
+              {...register("bike")}
+              className="select w-full"
+             
+            ></input>
           </fieldset>
         </div>
 
         <input
           type="submit"
-          value="Send Parcel"
+          value="Apply as a Rider"
           className="btn btn-primary mt-8 text-black"
         />
       </form>
