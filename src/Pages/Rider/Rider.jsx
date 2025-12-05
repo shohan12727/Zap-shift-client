@@ -3,6 +3,7 @@ import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const Rider = () => {
   const { register, handleSubmit, control } = useForm();
@@ -22,6 +23,19 @@ const Rider = () => {
 
   const handleRiderApplication = (data) => {
     console.log(data);
+    axiosSecure.post("/riders", data).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Agree with the cost?",
+          text: "Your application has been submitted. We will reach out soon",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "I agree",
+        });
+      }
+    });
   };
 
   return (
@@ -112,11 +126,7 @@ const Rider = () => {
 
             {/*  Bike info */}
             <label className="label mt-4">Bike Info </label>
-            <input
-              {...register("bike")}
-              className="select w-full"
-             
-            ></input>
+            <input {...register("bike")} className="select w-full"></input>
           </fieldset>
         </div>
 

@@ -53,7 +53,8 @@ const SendParcel = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "I agree",
-    }).then((result) => {
+    })
+    .then((result) => {
       if (result.isConfirmed) {
 
         // save the parcel info to the database
