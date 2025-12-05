@@ -14,6 +14,7 @@ import MyParcels from "../Pages/DashBoard/MyParcels";
 import Payment from "../Pages/DashBoard/Payment";
 import PaymentSuccess from "../Pages/DashBoard/PaymentSuccess";
 import PaymentCancel from "../Pages/DashBoard/PaymentCancel";
+import ApprovedRiders from "../Pages/DashBoard/ApprovedRiders";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
         path: "payment-cancelled",
         Component: PaymentCancel,
       },
+      {
+        path: 'approved-riders',
+        Component: ApprovedRiders
+      }
     ],
   },
 ]);

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { CiDeliveryTruck } from "react-icons/ci";
+import { MdOutlinePayment } from "react-icons/md";
+
 
 const DashBoardLayout = () => {
   return (
@@ -33,7 +35,7 @@ const DashBoardLayout = () => {
           <div className="px-4">Zap Shift Layout</div>
         </nav>
         {/* Page content here */}
-        <Outlet/>
+        <Outlet />
         {/* <div className="p-4">Page Content</div> */}
       </div>
 
@@ -48,7 +50,8 @@ const DashBoardLayout = () => {
           <ul className="menu w-full grow">
             {/* List item */}
             <li>
-              <Link to='/'
+              <Link
+                to="/"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage"
               >
@@ -72,15 +75,24 @@ const DashBoardLayout = () => {
             {/* all link here  */}
 
             <li>
-                <NavLink to='/dashboard/my-parcels'
-               className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              <NavLink
+                to="/dashboard/my-parcels"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="MyParcels"
-                >
-                    <CiDeliveryTruck />
-
-                    <span className="is-drawer-close:hidden">My Parcels</span>
-                
-                </NavLink>
+              >
+                <CiDeliveryTruck />
+                <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/approved-riders"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Approved Riders"
+              >
+              <MdOutlinePayment />
+                <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
             </li>
 
             {/* List item */}
