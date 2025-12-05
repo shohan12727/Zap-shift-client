@@ -18,7 +18,7 @@ import PaymentCancel from "../Pages/DashBoard/PaymentCancel";
 export const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <ErrorPage></ErrorPage>,
+    // errorElement: <ErrorPage></ErrorPage>,
     Component: Root,
     children: [
       {
@@ -37,6 +37,7 @@ export const router = createBrowserRouter([
             <Rider></Rider>
           </PrivateRoute>
         ),
+        loader: () => fetch("/servicesCenter.json").then((res) => res.json()),
       },
       {
         path: "/send-parcel",
@@ -80,7 +81,7 @@ export const router = createBrowserRouter([
         Component: Payment,
       },
       {
-        path: "payment-success", 
+        path: "payment-success",
         Component: PaymentSuccess,
       },
       {

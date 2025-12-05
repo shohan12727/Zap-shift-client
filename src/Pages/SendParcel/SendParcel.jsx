@@ -258,6 +258,7 @@ const SendParcel = () => {
           className="btn btn-primary mt-8 text-black"
         />
       </form>
+      
     </div>
   );
 };
