@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 import axios from "axios";
@@ -8,8 +8,8 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const axiosSecure = useAxiosSecure()
+  // const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -38,15 +38,13 @@ const Register = () => {
           const userInfo = {
             email: data.email,
             displayName: data.name,
-            photoURL: photoURL
-          }
-           axiosSecure.post('/users', userInfo)
-           .then(res => {
-            if(res.data.insertedId){
-              console.log('user created in the database')
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in the database");
             }
-           })
-
+          });
 
           // update user profile
           const userProfile = {

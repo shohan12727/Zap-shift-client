@@ -16,11 +16,12 @@ import PaymentSuccess from "../Pages/DashBoard/PaymentSuccess";
 import PaymentCancel from "../Pages/DashBoard/PaymentCancel";
 import ApprovedRiders from "../Pages/DashBoard/ApprovedRiders";
 import UsersManagement from "../Pages/DashBoard/UsersManagement";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    // errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     Component: Root,
     children: [
       {
@@ -91,13 +92,21 @@ export const router = createBrowserRouter([
         Component: PaymentCancel,
       },
       {
-        path: 'approved-riders',
-        Component: ApprovedRiders
+        path: "approved-riders",
+        element: (
+          <AdminRoute>
+            <ApprovedRiders></ApprovedRiders>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'users-management',
-        Component: UsersManagement
-      }
+        path: "users-management",
+        element: (
+          <AdminRoute>
+            <UsersManagement></UsersManagement>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

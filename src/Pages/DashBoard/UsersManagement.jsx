@@ -14,9 +14,9 @@ const UsersManagement = () => {
     },
   });
 
-  const handleMakeUser = (user) => {
+  const handleMakeAdmin = (user) => {
     const roleInfo = { role: "admin" };
-    axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+    axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({
@@ -91,7 +91,7 @@ const UsersManagement = () => {
                   ) : (
                     <button
                       className="btn bg-green-400"
-                      onClick={() => handleMakeUser(user)}
+                      onClick={() => handleMakeAdmin(user)}
                     >
                       <FiShieldOff />
                     </button>
