@@ -3,9 +3,10 @@ import { Link, NavLink, Outlet } from "react-router";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { MdOutlinePayment } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-
+import useRole from "../Hooks/useRole";
 
 const DashBoardLayout = () => {
+  const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -85,26 +86,40 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">My Parcels</span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/approved-riders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Approved Riders"
-              >
-              <MdOutlinePayment />
-                <span className="is-drawer-close:hidden">Approved Rider</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/users-management"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Users Management"
-              >
-              <FaUser></FaUser>
-                <span className="is-drawer-close:hidden">User Management</span>
-              </NavLink>
-            </li>
+            {/* approved rider  */}
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/approved-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approved Riders"
+                  >
+                    <MdOutlinePayment />
+                    <span className="is-drawer-close:hidden">
+                      Approved Rider
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* user management  */}
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/users-management"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Users Management"
+                  >
+                    <FaUser></FaUser>
+                    <span className="is-drawer-close:hidden">
+                      User Management
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* List item */}
             <li>
