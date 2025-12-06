@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { MdOutlinePayment } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 
 
 const DashBoardLayout = () => {
@@ -91,7 +92,17 @@ const DashBoardLayout = () => {
                 data-tip="Approved Riders"
               >
               <MdOutlinePayment />
-                <span className="is-drawer-close:hidden">Payment History</span>
+                <span className="is-drawer-close:hidden">Approved Rider</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/users-management"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Users Management"
+              >
+              <FaUser></FaUser>
+                <span className="is-drawer-close:hidden">User Management</span>
               </NavLink>
             </li>
 

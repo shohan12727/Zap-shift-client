@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { FaUserCheck } from "react-icons/fa";
+import { FaEye, FaUserCheck } from "react-icons/fa";
 import { IoPersonRemove } from "react-icons/io5";
 import { FaTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
@@ -16,14 +16,13 @@ const ApprovedRiders = () => {
     },
   });
 
-  
   const updateRiderStatus = (rider, status) => {
     const updateInfo = { status: status, email: rider.email };
     axiosSecure.patch(`/riders/${rider._id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({
-          title: `Rider status is set to${status}`,
+          title: `Rider status is set to ${status}`,
           icon: "success",
           draggable: true,
         });
@@ -79,6 +78,9 @@ const ApprovedRiders = () => {
                     onClick={() => handleApproval(rider)}
                   >
                     <FaUserCheck />
+                  </button>
+                  <button className="btn btn-primary text-black ml-3">
+                    <FaEye />
                   </button>
                   <button
                     className="btn btn-primary text-black mx-3"

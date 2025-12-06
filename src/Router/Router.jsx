@@ -15,6 +15,7 @@ import Payment from "../Pages/DashBoard/Payment";
 import PaymentSuccess from "../Pages/DashBoard/PaymentSuccess";
 import PaymentCancel from "../Pages/DashBoard/PaymentCancel";
 import ApprovedRiders from "../Pages/DashBoard/ApprovedRiders";
+import UsersManagement from "../Pages/DashBoard/UsersManagement";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path: 'approved-riders',
         Component: ApprovedRiders
+      },
+      {
+        path: 'users-management',
+        Component: UsersManagement
       }
     ],
   },
