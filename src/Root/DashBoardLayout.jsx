@@ -4,6 +4,8 @@ import { CiDeliveryTruck } from "react-icons/ci";
 import { MdOutlinePayment } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import useRole from "../Hooks/useRole";
+import { RiEBikeFill } from "react-icons/ri";
+
 
 const DashBoardLayout = () => {
   const { role } = useRole();
@@ -100,6 +102,19 @@ const DashBoardLayout = () => {
                     <MdOutlinePayment />
                     <span className="is-drawer-close:hidden">
                       Approved Rider
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/approved-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                  >
+                 <RiEBikeFill />
+
+                    <span className="is-drawer-close:hidden">
+                    Assign Riders
                     </span>
                   </NavLink>
                 </li>
